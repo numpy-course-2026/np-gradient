@@ -1,0 +1,5 @@
+# Переводы строк — всегда LF, даже если git в Windows настроен на CRLF:
+# иначе скрипты проверок ломаются в Git Bash и WSL.
+* text=auto eol=lf
+*.npz binary
+*.npy binary

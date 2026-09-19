@@ -1,0 +1,14 @@
+# Окружение, кеши и артефакты — не в репозиторий.
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.prof
+.ipynb_checkpoints/
+
+# Окружение и IDE
+.env
+.idea/
+.vscode/
+.DS_Store
