@@ -16,6 +16,7 @@
 
 ```text
 gradient/          ваш код: пакет библиотеки
+docs/              описания релизов — пишете вы
 data/              наборы данных (.npz) и их описание
 tickets/           тикеты — по одному на занятие курса
 checks/            проверки тикетов: checks/grdN/ — тесты тикета N; читайте, но не меняйте
@@ -45,3 +46,4 @@ uv run python         # интерпретатор с вашим пакетом:
 | [GRD-4](tickets/04-softmax.md) | 4 | устойчивые logsumexp, softmax, sigmoid, cross-entropy |
 | [GRD-5](tickets/05-linear.md) | 5 | линейная регрессия: lstsq, нормальные уравнения, гребневый штраф |
 | [GRD-6](tickets/06-softmax-regression.md) | 6 | softmax-регрессия, mini-batch SGD, проверка градиента |
+| [GRD-7](tickets/07-release.md) | 7 | релиз 0.1: `python -m gradient.train`, отчёт, описание релиза |
