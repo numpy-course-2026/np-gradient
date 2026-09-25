@@ -6,3 +6,4 @@ grd4 10 GRD-4 · устойчивые softmax и cross-entropy
 grd5 10 GRD-5 · линейная регрессия
 grd6 10 GRD-6 · softmax-регрессия и проверка градиента
 grd7 10 GRD-7 · релиз 0.1
+grd8 10 GRD-8 · слои Dense, ReLU и сеть MLP

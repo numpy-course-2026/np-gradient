@@ -1,11 +1,13 @@
 """Проверка правила курса: никаких Python-циклов по элементам массива.
 
-    python tests/loops.py файл.py функция [функция:N ...]
+    python tests/loops.py файл.py функция [Класс.метод:N ...]
 
 В перечисленных функциях запрещены while, генераторы списков/словарей/множеств,
 генераторные выражения, np.vectorize, np.frompyfunc, np.apply_along_axis и map.
 Цикл for разрешён, только если явно указано, сколько их можно: «функция:1» —
 для цикла по итерациям, эпохам или батчам, а не по элементам.
+Метод класса называют либо коротко («forward»), либо через класс («MLP.forward»):
+короткое имя действует на все одноимённые методы файла.
 Код возврата 1 и список нарушений с номерами строк — если правило нарушено.
 """
 import ast
@@ -41,23 +43,36 @@ def violations(func, allowed_for):
     return found
 
 
+def collect(tree, prefix=""):
+    """Функции файла как пары (полное имя, узел): «f», «Класс.метод»."""
+    out = []
+    for node in ast.iter_child_nodes(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            out.append((prefix + node.name, node))
+            out += collect(node, prefix + node.name + ".")
+        elif isinstance(node, ast.ClassDef):
+            out += collect(node, prefix + node.name + ".")
+    return out
+
+
 def main():
     if len(sys.argv) < 3:
         sys.exit(__doc__)
     path = Path(sys.argv[1])
     tree = ast.parse(path.read_text(encoding="utf-8"))
-    funcs = {n.name: n for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+    funcs = collect(tree)
     bad = False
     for spec in sys.argv[2:]:
         name, _, n = spec.partition(":")
-        func = funcs.get(name)
-        if func is None:
+        found = [(full, f) for full, f in funcs if full == name or full.endswith("." + name)]
+        if not found:
             print(f"{path}: нет функции {name}")
             bad = True
             continue
-        for line, what in violations(func, int(n or 0)):
-            print(f"{path}:{line}: {name}: {what}")
-            bad = True
+        for full, func in found:
+            for line, what in violations(func, int(n or 0)):
+                print(f"{path}:{line}: {full}: {what}")
+                bad = True
     sys.exit(1 if bad else 0)
 
 

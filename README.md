@@ -47,3 +47,4 @@ uv run python         # интерпретатор с вашим пакетом:
 | [GRD-5](tickets/05-linear.md) | 5 | линейная регрессия: lstsq, нормальные уравнения, гребневый штраф |
 | [GRD-6](tickets/06-softmax-regression.md) | 6 | softmax-регрессия, mini-batch SGD, проверка градиента |
 | [GRD-7](tickets/07-release.md) | 7 | релиз 0.1: `python -m gradient.train`, отчёт, описание релиза |
+| [GRD-8](tickets/08-layers.md) | 8 | слои Dense и ReLU, сеть MLP |
