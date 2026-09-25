@@ -49,3 +49,4 @@ uv run python         # интерпретатор с вашим пакетом:
 | [GRD-7](tickets/07-release.md) | 7 | релиз 0.1: `python -m gradient.train`, отчёт, описание релиза |
 | [GRD-8](tickets/08-layers.md) | 8 | слои Dense и ReLU, сеть MLP |
 | [GRD-9](tickets/09-init-dropout.md) | 9 | инициализация Xavier/He, dropout, режимы train/eval |
+| [GRD-10](tickets/10-conv.md) | 10 | свёртка, пулинг, Flatten, цифры 28×28 |
