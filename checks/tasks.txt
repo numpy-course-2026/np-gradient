@@ -9,3 +9,4 @@ grd7 10 GRD-7 · релиз 0.1
 grd8 10 GRD-8 · слои Dense, ReLU и сеть MLP
 grd9 10 GRD-9 · инициализация Xavier/He и dropout
 grd10 10 GRD-10 · свёрточный слой и пулинг
+grd11 10 GRD-11 · сохранение и загрузка модели

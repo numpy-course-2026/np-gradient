@@ -2,10 +2,10 @@
 
     python tests/loops.py файл.py функция [Класс.метод:N ...]
 
-В перечисленных функциях запрещены while, генераторы списков/словарей/множеств,
-генераторные выражения, np.vectorize, np.frompyfunc, np.apply_along_axis и map.
-Цикл for разрешён, только если явно указано, сколько их можно: «функция:1» —
-для цикла по итерациям, эпохам или батчам, а не по элементам.
+В перечисленных функциях запрещены while, np.vectorize, np.frompyfunc,
+np.apply_along_axis и map. Циклы for и генераторы (списков, словарей, множеств,
+генераторные выражения) разрешены, только если явно указано, сколько их можно:
+«функция:1» — для цикла по итерациям, эпохам, батчам или слоям, а не по элементам.
 Метод класса называют либо коротко («forward»), либо через класс («MLP.forward»):
 короткое имя действует на все одноимённые методы файла.
 Код возврата 1 и список нарушений с номерами строк — если правило нарушено.
@@ -27,17 +27,16 @@ def called_name(node):
     return None
 
 
-def violations(func, allowed_for):
-    found, fors = [], 0
+def violations(func, allowed):
+    found, loops = [], 0
     for node in ast.walk(func):
-        if isinstance(node, (ast.For, ast.AsyncFor)):
-            fors += 1
-            if fors > allowed_for:
-                found.append((node.lineno, "цикл for"))
+        if isinstance(node, (ast.For, ast.AsyncFor, *COMPREHENSIONS)):
+            loops += 1
+            if loops > allowed:
+                what = "цикл for" if isinstance(node, (ast.For, ast.AsyncFor)) else "генератор — это тоже цикл"
+                found.append((node.lineno, what))
         elif isinstance(node, ast.While):
             found.append((node.lineno, "цикл while"))
-        elif isinstance(node, COMPREHENSIONS):
-            found.append((node.lineno, "генератор/включение — это тоже цикл"))
         elif isinstance(node, ast.Call) and called_name(node) in SLOW_CALLS:
             found.append((node.lineno, f"{called_name(node)} — цикл на Python под капотом"))
     return found
