@@ -51,3 +51,6 @@ uv run python         # интерпретатор с вашим пакетом:
 | [GRD-9](tickets/09-init-dropout.md) | 9 | инициализация Xavier/He, dropout, режимы train/eval |
 | [GRD-10](tickets/10-conv.md) | 10 | свёртка, пулинг, Flatten, цифры 28×28 |
 | [GRD-11](tickets/11-store.md) | 11 | сохранение и загрузка модели без pickle |
+| [GRD-12](tickets/12-optim.md) | 12 | оптимизаторы SGD, Momentum, Adam |
+| [GRD-13](tickets/13-report.md) | 13 | кривые обучения, матрица ошибок, сравнение оптимизаторов |
+| [GRD-14](tickets/14-release.md) | 14 | релиз 1.0: свёрточная сеть, модель файлом, отчёт |

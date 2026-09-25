@@ -13,7 +13,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_version():
-    assert gradient.__version__ == "0.1.0"
+    parts = gradient.__version__.split(".")
+    assert len(parts) == 3 and all(p.isdigit() for p in parts), "версия вида X.Y.Z"
+    assert tuple(int(p) for p in parts) >= (0, 1, 0)
 
 
 @pytest.fixture(scope="module")

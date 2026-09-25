@@ -3,7 +3,7 @@
 name = "np-gradient"
 version = "0"
 requires-python = ">=3.14"
-dependencies = ["numpy>=2.5,<2.6"]
+dependencies = ["numpy>=2.5,<2.6", "scipy>=1.16", "matplotlib>=3.10"]
 
 [dependency-groups]
 dev = ["pytest>=9", "ruff>=0.13"]
